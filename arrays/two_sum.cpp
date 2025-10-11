@@ -35,7 +35,7 @@ bool is_sorted(const std::vector<T>& vec) {
 }
 
 template <typename T>
-void reading_data(std::vector<T>& data, std::size_t size) {
+void reading_data(std::vector<T>& data, int size) {
     for(int k = 0; k < size; ++k) std::cin >> data[k];
 }
 
