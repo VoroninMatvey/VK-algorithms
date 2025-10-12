@@ -31,7 +31,8 @@ std::vector<T> merging(const std::vector<T>& vec1, const std::vector<T>& vec2) {
 }
 
 template <typename T>
-void reading_data(std::vector<T>& data, int size) {
+void reading_data(std::vector<T>& data) {
+    int size = data.size();
     for(int k = 0; k < size; ++k) std::cin >> data[k];
 }
 
@@ -62,8 +63,8 @@ int main() {
     int size1, size2;
     std::cin >> size1 >> size2;
     std::vector<int> vec1(size1), vec2(size2);
-    details::reading_data(vec1, size1);
-    details::reading_data(vec2, size2);
+    details::reading_data(vec1);
+    details::reading_data(vec2);
 
     if(details::is_sorted(vec1) && details::is_sorted(vec2)) {
         std::vector<int> result_vec = details::merging(vec1, vec2);

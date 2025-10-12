@@ -35,7 +35,8 @@ bool is_sorted(const std::vector<T>& vec) {
 }
 
 template <typename T>
-void reading_data(std::vector<T>& data, int size) {
+void reading_data(std::vector<T>& data) {
+    int size = data.size();
     for(int k = 0; k < size; ++k) std::cin >> data[k];
 }
 
@@ -46,7 +47,7 @@ int main() {
     std::cin >> size >> target;
     std::vector<int> vec(size);
     std::pair<int,int> pair;
-    details::reading_data(vec, size);
+    details::reading_data(vec);
 
     if(details::is_sorted(vec)) {
         pair = details::two_sum(vec, target);

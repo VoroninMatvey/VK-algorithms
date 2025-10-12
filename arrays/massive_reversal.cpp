@@ -33,7 +33,8 @@ void print_vector(const std::vector<T>& vec) {
 }
 
 template <typename T>
-void reading_data(std::vector<T>& data, int size) {
+void reading_data(std::vector<T>& data) {
+    int size = data.size();
     for(int k = 0; k < size; ++k) std::cin >> data[k];
 }
 
@@ -48,11 +49,11 @@ int main() {
     #ifdef SHIFT
         int shift;
         std::cin >> shift;
-        details::reading_data(vec, size);
+        details::reading_data(vec);
         details::right_shift(vec, shift);
         details::print_vector(vec);
     #else   
-        details::reading_data(vec, size);
+        details::reading_data(vec);
         details::reverse(vec, 0, vec.size() - 1);
         details::print_vector(vec);
     #endif

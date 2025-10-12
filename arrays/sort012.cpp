@@ -3,19 +3,28 @@
 
 namespace details {
 
-template <typename T>
-void sorted(std::vector<T>& vec) {
-    int left = 0, right = vec.size() -1;
+// [0 : low-1] - zeroes
+// [low : mid - 1] - ones
+// [mid : high] - study area
+// [high + 1 : n - 1] - twos
 
-    while(left < right) {
-        if(vec[left] == 0) {
-            ++left;
-        } else {
-            std::swap(vec[left], vec[right]);
-            --right;
-        }
+template <typename T>
+void sortedDutchFlag(std::vector<T>& vec) {
+    int low = 0, mid = 0; 
+    int high = vec.size() -1;
+
+    while(mid <= high) {
+        if(vec[mid] == 2) {
+            std::swap(vec[mid], vec[high]);
+            --high;
+        } else if(vec[mid] == 0) {
+            std::swap(vec[mid], vec[low]);
+            ++low; ++mid;
+        } else ++mid;
     }
+
 }
+
 template <typename T>
 void reading_data(std::vector<T>& data) {
     int size = data.size();
@@ -36,6 +45,6 @@ int main() {
     std::cin >> size;
     std::vector<int> vec(size);
     details::reading_data(vec);
-    details::sorted(vec);
+    details::sortedDutchFlag(vec);
     details::print_vector(vec);
 }
