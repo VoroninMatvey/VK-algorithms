@@ -4,15 +4,15 @@
 namespace details {
 
 template <typename T>
-void end_move_even(std::vector<T>& vec) {
-    int even_place = 0, it = 0;
+void end_move_zeros(std::vector<T>& vec) {
+    int reverse_it = vec.size() - 1, it = 0;
 
-    while(it < vec.size()) {
-        if(vec[it] % 2 == 1) {
-            ++it;
+    while(it < reverse_it) {
+        if(vec[it] == 0) {
+            std::swap(vec[it], vec[reverse_it]);
+            --reverse_it;
         } else {
-            std::swap(vec[it], vec[even_place]);
-            ++it; ++even_place;
+            ++it;
         }
     }
 }
@@ -37,6 +37,6 @@ int main() {
     std::cin >> size;
     std::vector<int> vec(size);
     details::reading_data(vec);
-    details::end_move_even(vec);
+    details::end_move_zeros(vec);
     details::print_vector(vec);
 }
