@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 
 namespace details {
 
@@ -168,6 +169,22 @@ public:
     return slow->data_;
   }
 
+  void merger(List<value_type>& temp) {
+    if(temp.empty()) return;
+    if(empty()) {
+        head_ = std::move(temp.head_);
+        tail_ = temp.tail_;
+    } else {
+        temp.head_->prev_ = tail_;
+        tail_->next_ = std::move(temp.head_);
+        tail_ = temp.tail_;
+    }
+        size_ += temp.size_;
+
+        temp.tail_ = nullptr;
+        temp.size_ = 0;
+  }
+
   //after using this method the list class object becomes invalid before use make_uncircular
   void make_circular() {
     head_ -> prev_ = tail_;
@@ -218,7 +235,7 @@ void read_data(std::size_t size, List<T>& list) {
 } // namespace details
 
 int main() { 
-    std::cout << "enter size more than 2" << std::endl;
+    std::cout << "Enter size of list and its elements" << std::endl;
     std::size_t size;
     std::cin >> size;
     
@@ -245,4 +262,12 @@ int main() {
     list.make_circular(); // list invalid
     std::cout << "list is circular: " << std::boolalpha << list.is_circular() << std::endl;
     list.make_uncircular();
+
+    details::List<int> temp;
+    std::cout << "Enter size of list and its elements" << std::endl;
+    std::size_t size2;
+    std::cin >> size2;
+    details::read_data(size2, temp);
+    list.merger(temp);
+    std::cout << "Merge the first and second lists:" << std::endl << list << std::endl;
 }
