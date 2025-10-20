@@ -6,16 +6,14 @@
 
 namespace details {
 
-bool is_subsequence_by_queue(const std::string &a_str,
-                             const std::string &b_str) {
-
+bool is_subsequence_by_queue(const std::string &a, const std::string &b) {
   std::queue<char> a_word, b_word;
 
-  for (char elem : a_str) {
+  for (char elem : a) {
     a_word.push(elem);
   }
 
-  for (char elem : b_str) {
+  for (char elem : b) {
     b_word.push(elem);
   }
 
